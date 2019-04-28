@@ -9,13 +9,15 @@ namespace ConsoleApp1
     class Program
     {
         static int migratoryBirds(List<int> arr)
+
         {
+            arr.Sort();
             int answer = 0;
             Dictionary<int, int> dict = new Dictionary<int, int>();
             for (int i = 0; i < arr.Count(); i++)
             {
                 int currentNum = arr[i];
-                if(dict.ContainsKey(currentNum))
+                if (dict.ContainsKey(currentNum))
                 {
                     int q = 0;
                     dict.TryGetValue(currentNum, out q);
@@ -26,46 +28,20 @@ namespace ConsoleApp1
                 {
                     dict.Add(currentNum, 1);
                 }
-                
-            }            
+
+            }
             List<int> nums = new List<int>();
             List<int> quans = new List<int>();
             foreach (KeyValuePair<int, int> kvp in dict)
             {
                 nums.Add(kvp.Key);
                 quans.Add(kvp.Value);
-                
-            }            
-            if(nums.Count() ==1)
-            {
-                answer = nums[0];
-                return answer;
+
             }
-            if(nums.Count() ==2)
-            {
-                if (quans[0] == quans[1])
-                {
-                    nums.Sort();
-                    answer = nums[0];
-                    return answer;
-                }
-                else if (quans[1] > quans[0])
-                {
-                    answer = nums[1];
-                    return answer;
-                }
-                else
-                {
-                    answer = nums[0];
-                    return answer;
-                }
-            }
-            int m = quans.Max();
-            int postion = quans.IndexOf(m);
-            answer = nums[postion];
+            int maxQuantity = quans.Max();
+            answer = nums[quans.IndexOf(maxQuantity)];
             return answer;
 
-           
 
         }
 
